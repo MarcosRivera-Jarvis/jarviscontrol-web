@@ -585,10 +585,38 @@ function Contact() {
           </div>
 
           <form
-            onSubmit={(event) => {
-              event.preventDefault();
-              setSent(true);
-            }}
+            onSubmit={async (event) => {
+  event.preventDefault();
+
+  const form = event.currentTarget;
+
+  const data = {
+    name: form.name.value,
+    email: form.email.value,
+    company: form.company.value,
+    message: form.message.value,
+    area: form.area.value,
+  };
+
+  try {
+    await fetch(
+      "https://n8n.jarviscontrol.cloud/webhook/jarvis-diagnostico",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      }
+    );
+
+    setSent(true);
+    form.reset();
+  } catch (error) {
+    console.error(error);
+    alert("Error enviando solicitud");
+  }
+}}
             className="rounded-lg border border-white/10 bg-background/45 p-4 sm:p-5"
           >
             <div className="grid gap-3 sm:grid-cols-2">
