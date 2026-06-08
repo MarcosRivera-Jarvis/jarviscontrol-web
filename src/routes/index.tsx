@@ -600,7 +600,7 @@ function Contact() {
 
   try {
     await fetch(
-      "https://n8n.jarviscontrol.cloud/webhook-test/jarvis-diagnostico",
+      "https://n8n.jarviscontrol.cloud/webhook/jarvis-diagnostico",
       {
         method: "POST",
         headers: {
